@@ -1,0 +1,425 @@
+/*==============================================================*/
+/* Table: ARMA                                                  */
+/*==============================================================*/
+create table ARMA (
+   ID_ARMA              INT4                 not null,
+   TIPO_ARMA            VARCHAR(50)          null,
+   NOMBRE_ARMA          VARCHAR(50)          null,
+   constraint PK_ARMA primary key (ID_ARMA)
+); 
+/*inserciones*/ SELECT * FROM ARMA
+insert into ARMA (ID_ARMA,TIPO_ARMA,NOMBRE_ARMA) VALUES (1,'PISTOLA','USP');
+insert into ARMA (ID_ARMA,TIPO_ARMA,NOMBRE_ARMA) VALUES (2,'DOBLE CAÑON','ESCOPETA');
+insert into ARMA values (3,'pistola','usp');
+insert into ARMA values ('4','DOBLE CAÑON','ESCOPETA');
+insert into ARMA values ('5','pistola','usp');
+insert into ARMA values ('6','DOBLE CAÑON','ESCOPETA');
+insert into ARMA values ('7','DOBLE CAÑON','ESCOPETA');
+insert into ARMA values ('8','pistola','usp');
+insert into ARMA values ('9','pistola','g18');
+insert into ARMA values ('10','DOBLE CAÑON','ESCOPETA');
+insert into ARMA values ('11','fusil','scar');
+insert into ARMA values ('12','fusil','scar');
+insert into ARMA values ('13','pistola','g18');
+insert into ARMA values ('14','fusil','scar');
+insert into ARMA values ('15','pistola','g18');
+insert into ARMA values ('16','fusil','scar');
+insert into ARMA values ('17','pistola','usp');
+insert into ARMA values ('18','fusil','scar');
+insert into ARMA values ('19','fusil','m16');
+insert into ARMA values ('20','fusil','m14');
+insert into ARMA values ('21','pistola','g18');
+insert into ARMA values ('22','pistola','usp');
+insert into ARMA values ('23','DOBLE CAÑON','ESCOPETA');
+insert into ARMA values ('24','pistola','usp');
+/*==============================================================*/
+/* Index: ARMA_PK                                               */
+/*==============================================================*/
+create unique index ARMA_PK on ARMA (
+ID_ARMA
+);
+
+/*==============================================================*/
+/* Table: AULA                                                  */
+/*==============================================================*/
+create table AULA (
+   ID_AULA              INT4                 not null,
+   AULA                 VARCHAR(30)          null,
+   constraint PK_AULA primary key (ID_AULA)
+);
+/* INSERCION AULA*/
+insert into Aula values (1,'200');
+insert into Aula values (2,'301');
+insert into Aula values (3,'202');
+
+/*==============================================================*/
+/* Index: AULA_PK                                               */
+/*==============================================================*/
+create unique index AULA_PK on AULA (
+ID_AULA
+);
+
+/*==============================================================*/
+/* Table: CALIFICACION                                          */
+/*==============================================================*/
+create table CALIFICACION (
+   ID_CALIFICACION      INT4                 not null,
+   ID_ESTUDIANTE        INT4                 null,
+   ID_DOCENTE           INT4                 null,
+   ID_MATERIA           INT4                 null,
+   CALIFICACION1        numeric(6,2)        null,
+	CALIFICACION2       numeric(6,2)          null,
+	CALIFICACION3       numeric(6,2)          null,
+   constraint PK_CALIFICACION primary key (ID_CALIFICACION)   
+); 
+/*INSERSIONES*/
+insert into calificacion values (1,1,1,1, 10, 6, 8);
+insert into calificacion values (2,2,2,2, 10, 7,9);
+insert into calificacion values (3,3,3,3, 6,8,9);
+insert into calificacione values ('4','4','7.5','8.21','9.33');
+insert into calificacione values ('5','5','10','7.25','6.99',);
+insert into calificacione values ('6','6','6.69','7.25','8.29');
+insert into calificacione values ('','7','8.29','6.34','8.96');
+insert into calificacione values ('8','8','5.50','9.45','9.5');
+insert into calificacione values ('9','9','9.25','8.46','9.85');
+insert into calificacione values ('10','10','9.56''9.46','9.5');
+insert into calificacione values ('11','11','6.50','10','8.56');
+insert into calificacione values ('12','12','8.50','9.97','7.25');
+insert into calificacione values ('13','13','9.22','9.99','6.59');
+insert into calificacione values ('14','14','8.53','8.11','8.5');
+insert into calificacione values ('15','15','7.95','8.26','5.90');
+insert into calificacione values ('16','16','7.26','9.46','9.86');
+insert into calificacione values ('17','17','7.69','9.46','9.57');
+insert into calificacione values ('18','18','10','5.65','9.96');
+insert into calificacione values ('19','19','10','8.56','4.20');
+insert into calificacione values ('20','20','10','8.52','9.50');
+insert into calificacione values ('21','21','10','8','8.23');
+insert into calificacione values ('22','22','9','10','9.62');
+insert into calificacione values ('23','23','8','9','9.32');
+insert into calificacione values ('24','24','7.22','7','8.63');
+
+/*==============================================================*/
+/* Index: CALIFICACION_PK                                       */
+/*==============================================================*/
+create unique index CALIFICACION_PK on CALIFICACION (
+ID_CALIFICACION
+);
+
+/*==============================================================*/
+/* Index: ESTUDIANTES_CALIFICACIONES_FK                         */
+/*==============================================================*/
+create  index ESTUDIANTES_CALIFICACIONES_FK on CALIFICACION (
+ID_ESTUDIANTE
+);
+
+/*==============================================================*/
+/* Index: DOCENTE_CALIFICACION_FK                               */
+/*==============================================================*/
+create  index DOCENTE_CALIFICACION_FK on CALIFICACION (
+ID_DOCENTE
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_14_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_14_FK on CALIFICACION (
+ID_MATERIA
+);
+
+/*==============================================================*/
+/* Table: CURSO                                                 */
+/*==============================================================*/
+create table CURSO (
+   ID_CURSO             INT4                 not null,
+   ID_AULA              INT4                 not null,
+   ID_ESTUDIANTE        INT4                 not null,
+   NIVEL                VARCHAR(10)           null,
+   UBICACION            VARCHAR(20)          null,
+   NUMERO_ESTUDIANTES   NUMERIC(50)          null,
+   NUMEROS_HOMBRES      NUMERIC(50)          null,
+   NUMEROS_MUJERES      NUMERIC(50)          null,
+   PARALELOS            VARCHAR(10)          null,     
+   constraint PK_CURSO primary key (ID_CURSO)
+);
+insert into curso values (1,1,1,'primero','AV EJERCITO','15','8','6','A');
+insert into curso values (2,2,2,'Primero','AV EJERCITO','15','8','6','A');
+insert into Curso values (3,3,3,'primero','AV EJERCITO','15','8','6','A');
+insert into Curso values ('4','4','primero','AV EJERCITO','12','6','6','B');
+insert into Curso values ('5','5','primero','AV EJERCITO','12','6','6','B');
+insert into Curso values ('6','6','primero','AV EJERCITO','12','6','6','B');  
+insert into Curso values ('7','7','segundo','AV EJERCITO','11','9','2','A');
+insert into Curso values ('8','8','segundo','AV EJERCITO','11','9','2','A');
+insert into Curso values ('9','9','segundo','AV EJERCITO','11','9','2','A');
+insert into Curso values ('10','10','segundo','AV EJERCITO','11','5','6');
+insert into Curso values ('11','11','segundo','AV EJERCITO','11','5','6','B');
+insert into Curso values ('12','12','segundo','AV EJERCITO','11','6','5','B');
+insert into Curso values ('13','13','tercero','AV EJERCITO','10','5','5','A');
+insert into Curso values ('14','14','tercero','AV EJERCITO','10','9','5','A');
+insert into Curso values ('15','15','tercero','AV EJERCITO','10','5','4','A');
+insert into Curso values ('16','16','tercero','AV EJERCITO','9','5','4','B');
+insert into Curso values ('17','17','tercero','AV EJERCITO','9','5','4','B');
+insert into Curso values ('18','18','tercero','AV EJERCITO','9','5','4','B');
+
+/*==============================================================*/
+/* Index: CURSO_PK                                              */
+/*==============================================================*/
+create unique index CURSO_PK on CURSO (
+ID_CURSO
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_16_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_16_FK on CURSO (
+ID_AULA
+);
+
+/*==============================================================*/
+/* Table: DOCENTE                                               */
+/*==============================================================*/
+create table DOCENTE (
+   ID_DOCENTE           INT4                 not null,
+   NOMBRE               VARCHAR(80)          null,
+   APELLIDO             VARCHAR(80)          null,
+   NUMERO_CELULAR       VARCHAR(10)          null,
+   EDAD                 VARCHAR(20)          null,
+   RANGO_POLICIAL       VARCHAR(20)          null,
+   CORREO_ELECTRONICO   VARCHAR(80)          null,
+   NACIONALIDAD         VARCHAR(20)          null,
+   constraint PK_DOCENTE primary key (ID_DOCENTE)  
+);
+/*INSERCIONES*/
+insert into docente values ('1','Juan Fernando ','Pérez del Corral','0985711897','35','Coronel','fernandop@gmail.com','Ecuatoriano');
+insert into docente values ('2','Sara Teresa  ','Sánchez del Pinar','0999221167','25','Oficiales','piñar.sarap@gmail.com','Ecuatoriano');
+insert into docente values ('3','Martín Elías ',' Ríos Acosta ','0950078921','45','Coronel','acosta.elimar@gmail.com','estadounidense');
+insert into docente values ('4','Mónica Patricia ','Ávalos Mendoza','0957896524','31','General','fmonica123@gmail.com','Mexicana');
+insert into docente values ('5','Diego Alejandro ','Redroban Becerra ','095789521','29','Oficial','becerra89@gmail.com','Ecuatoriano');
+insert into docente values ('6','Angela Lucciola  ','Suarez Velasquez  ','0910259862','50','Teniente','tenientesua@gmail.com','Canadiense');
+insert into docente values ('7','Carlos Dionisio  ','Sornoza Moranl','0945284890','46','Subteniente','sornoza12@gmail.com','Ecuatoriano');
+insert into docente values ('8','Marlon Roberto  ','Banegas Andrade','0957823650','33','Coronel','banegas@gmail.com','Ecuatoriano');
+insert into docente values ('9','Teodoro Ivan  ','Blakman Briones ','0980885789','30','Coronel','brion.ivan@gmail.com','Ecuatoriano');
+insert into docente values ('10','Mireya Veronica ','Choez Caicedo ','0989628024','38','Coronel','choez82@gmail.com','Ecuatoriano');	
+insert into docente values ('11','Kurt Ernesto  ','Lainez Landi ','097511987','28','Ofical','ernestp10@gmail.com','Holandesa');
+/*==============================================================*/
+/* Index: DOCENTE_PK                                            */
+/*==============================================================*/
+create unique index DOCENTE_PK on DOCENTE (
+ID_DOCENTE
+);
+
+/*==============================================================*/
+/* Table: ESTUDIANTE                                            */
+/*==============================================================*/
+create table ESTUDIANTE (
+   ID_ESTUDIANTE        INT4                 not null,
+   ID_DOCENTE           INT4                 null,
+   ID_ARMA              INT4                 not null,
+   CEDULA               VARCHAR(10)          null,
+   NOMBRE               VARCHAR(80)          null,
+   APELLIDO             VARCHAR(80)          null,
+   NUMERO_CELULAR       VARCHAR(10)          null,
+   FCEHA_NACIMIENTO     DATE                 null,
+   ESTADO_CIVIL         VARCHAR(10)          null,
+   PROVINCIA            VARCHAR(30)          null,
+   CIUDAD_ORIGEN        VARCHAR(30)          null,
+   CORREO_ELECTRONICO   VARCHAR(30)          null,
+   GENERO               VARCHAR(30)          null,
+   NACIONALIDAD         VARCHAR(30)          null,
+   constraint PK_ESTUDIANTE primary key (ID_ESTUDIANTE)
+);
+/*inserrciones estudieantes*/
+insert into Estudiante values (1,1,1,'1350964902','Christian Ariel','Vergara Alava','0992255987','2002/07/08','soltero','Manabi','Manta','cristhian07.vergara@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values (2,2,2,'1308382561','Wilton Edulfo','Vergara cedeño','0971360096','2000/03/23','casado','Manabi','Manta','vc.wilton@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values (3,3,3,'1314782682','Leydi fabiola','Vera Paz','0945015533','2000/12/09','soltera','guayas','Daule','ldf.vergara@gmail.com','Femenina','ecuatoriano');
+insert into Estudiante values (4,4,4,'0825967824','Valeria Susana','Muñoz Perez','0973542116','1995/04/12','soltera','Esmeralda','Atacames','muñozperez1995@gmail.com','Femenina','ecuatoriano');
+insert into Estudiante values (5,5,5,5,'0125641235','Mercedes Maria ','López González ','0933720966','2003/02/01','soltera','Azuay','Cuenca','cgonzales2003@gmail.com','Femenina','ecuatoriano');
+insert into Estudiante values ('6','6','1','6','0125796799','Byron David ','Cevallos Trujillo ','0976661162','2000/05/13','casado','Azuay','Gualaceo','truillo2000@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('7','7','1','7','0750923902','Gonzalo Luis ','Balcazar Campoverde','0956034670','2001/11/11','soltero','El Oro','Machala','campoverdeg1@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('8','8','8','8','0924382561','Fernanda Noemi','Campos Mendieta ','0989202585','2000/03/23','casada','Guayas','Guyaquill','mendieta566ssda@gmail.com','Femenina','ecuatoriano');
+insert into Estudiante values ('9','9','9','9','0951944512','Jaime Eduardo ','Cárdenas Molina ','0971279845','199/02/28','soltero','Santa Elena','Salinas','ccardeaspas65@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('10','10','10','10','1338854892','Carlos Daniel ','Villavicencio Pesantez ','0952234845','2000/12/31','casado','Manabi','Chone','daniel563asd@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('11','11','11','11','1325985792','Marlene Estefania','Novillo Jara ','0982040961','2000/04/09','soltera','Manabi','Montecristi','araa458s@gmail.com','Femenina','ecuatoriano');
+insert into Estudiante values ('12','12','12','12','2408214956','Johanna Sofia ','Perez Cabrera ','0920777905','1998/05/31','casada','Manabi','Manta','cabreras54as@gmail.com','Femenina','ecuatoriano');
+insert into Estudiante values ('13','13','13','13','2150088793','Martha Patricia ','Morales Harris ','0999395628','1997/07/08','soltera','Sucumbio','Cascales','morales54asd@gmail.com','Femenina','ecuatoriano');
+insert into Estudiante values ('14','14','14','14','2189672080','Jaime Vicente ','Chuchuca Serrano ','0912630934','2000/03/23','soltero','Sucumbio','lago Agario','serrabo65asd@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('15','15','15','15','1350964902','Xavier Eduardo ','Montalvo Aponte ','0931153121','2002/07/08','soltero','Manabi','Manta','montalvos5@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('16','16','16','16','1308382561','Alex Ruben ','Cobos Veloz ','0911491330','2000/03/23','casado','Manabi','Manta','velozocb656@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('17','17','17','17','1310964911','Mireya Katerine ','Pazmiño Arregui ','0992704967','1995/12/25','soltera','Manabi','Rocafuerte','pazmiño125@gmail.com','Femenina','ecuatoriano');
+insert into Estudiante values ('18','18','18','18','1789245242','Danilo Fernando ','García García ','0961454670','2001/06/19','soltero','Pichincha','Quito','garcia2.0@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('19','19','19','19','1532956625','Oswaldo Ernesto ','Lopez Bravo ','0992283323','1993/03/03','soltero','Napo','Tena','lopezb@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('20','20','20','20','1398527410','Juan Jose ','VOrtega Vintimilla ','0967556836','2003/12/18','soltero','Manabi','Pajan','ramiocbz@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('21','21','21','21','1350964902','Carchi Geovanny ','Ramiro Cabezas ','0923029175','2002/07/08','soltero','Manabi','Manta','saguaysan@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('22','22','2','22','0789655753','Lenin Eduardo ','Saguay Sanaguano  ','0943742960','2000/03/23','casado','El Oro','Machala','eduardolm@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('23','23','23','23','1350966653','Hernán Sebastián ','López Montero ','0903750416','2002/07/28','casado','Manabi','Tosahua','lopez2002@gmail.com','Masculino','ecuatoriano');
+insert into Estudiante values ('24','24','24','24','1308754175','Georgina Piedad ','Panchez Hernandez ','0999711114','1999/10/08','casado','Manabi','San clemente','panchez1999@gmail.com','Masculino','ecuatoriano');
+/*==============================================================*/
+/* Index: ESTUDIANTE_PK                                         */
+/*==============================================================*/
+create unique index ESTUDIANTE_PK on ESTUDIANTE (
+ID_ESTUDIANTE
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_10_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_10_FK on ESTUDIANTE (
+ID_ARMA
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_12_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_12_FK on ESTUDIANTE (
+ID_DOCENTE
+);
+
+/*==============================================================*/
+/* Index: CURSO_ESTUDIANTES_FK                                  */
+/*==============================================================*/
+create  index CURSO_ESTUDIANTES_FK on ESTUDIANTE (
+ID_CURSO
+);
+
+/*==============================================================*/
+/* Table: MATERIA                                               */
+/*==============================================================*/
+create table MATERIA (
+   ID_MATERIA           INT4                 not null,
+   ID_AULA              INT4                 not null,
+   ID_DOCENTE           INT4                 null,
+   ID_ESTUDIANTE        INT4                 null,
+   MATERIA              VARCHAR(20)          null,
+   HORAS_CLASES         TIME                 null,
+   HORAS_TUTORIAS       TIME                 null,
+   SECCION              VARCHAR(20)          null,
+   constraint PK_MATERIA primary key (ID_MATERIA)
+);
+/*INSERCIO MATERIA*/
+insert into MATERIA values (1,1,1,1,'ciudadania','2:30',' 1:00','matutina');
+insert into MATERIA values (2,2,2,2,'matematica','2:00','1:00','matutina');
+insert into MATERIA values (3,3,3,3,'Armamento', '3:00','2:00','matutina');
+insert into MATERIA values (4,4,4,3,'matematica','2:00','1:00','matutina');
+insert into MATERIA values (5,5,5,5,'matematica','2:30',' 1:00','matutina');
+insert into MATERIA values (6,6,6,2,'matematica','3:00','2:00','matutina');
+insert into MATERIA values ('7','7','7','3','Fundamentos','2:00','1:00','matutina');
+insert into MATERIA values ('8','8','8','3','InformaticaII','2:30',' 1:00','matutina');
+insert into MATERIA values ('9','9','9','3','Paracaidismo','3:00','2:00','matutina');
+insert into MATERIA values ('10','10','10','1','ciudadania','2:30',' 1:00','matutina');	
+insert into MATERIA values ('11','11','11','1','ciudadania','2:30',' 1:00','vespertina');
+
+/*==============================================================*/
+/* Index: MATERIA_PK                                            */
+/*==============================================================*/
+create unique index MATERIA_PK on MATERIA (
+ID_MATERIA
+);
+
+/*==============================================================*/
+/* Index: DOCENTE_MATERIA_FK                                    */
+/*==============================================================*/
+create  index DOCENTE_MATERIA_FK on MATERIA (
+ID_DOCENTE
+);
+
+/*==============================================================*/
+/* Index: ESTUDIANTE_MATERIA_FK                                 */
+/*==============================================================*/
+create  index ESTUDIANTE_MATERIA_FK on MATERIA (
+ID_ESTUDIANTE
+);
+
+/*==============================================================*/
+/* Index: RELATIONSHIP_17_FK                                    */
+/*==============================================================*/
+create  index RELATIONSHIP_17_FK on MATERIA (
+ID_AULA
+);
+
+/*==============================================================*/
+/* Table: SANCION                                               */
+/*==============================================================*/
+create table SANCION (
+   ID_SANCION           INT4                 not null,
+   ID_ESTUDIANTE        INT4                 null,
+   MOTIVO_SANCION       VARCHAR(50)          null,
+   TIPO_SANCION         VARCHAR(30)          null,
+   constraint PK_SANCION primary key (ID_SANCION)
+);
+/* INSERCION*/
+insert into sancion values('1','1','perida de armamento','economica');
+insert into sancion values('2','4','Daño en armento','diciplinaria');
+insert into sancion values('3','6','perida de armamento','economica');
+insert into sancion values('4','12','Armamento robado','diciplinario');
+insert into sancion values('5','11','perida de armamento','economica');
+insert into sancion values('6','15','no llevar el arma','diciplinaria');
+insert into sancion values('7','19','daño en armamento','economica');
+insert into sancion values('8','20','perida de armamento','economica');
+insert into sancion values('9','21','perida de armamento','diciplinaria');
+/*==============================================================*/
+/* Index: SANCION_PK                                            */
+/*==============================================================*/
+create unique index SANCION_PK on SANCION (
+ID_SANCION
+);
+
+/*==============================================================*/
+/* Index: ESTUDIANTE_SANCION_FK                                 */
+/*==============================================================*/
+create  index ESTUDIANTE_SANCION_FK on SANCION (
+ID_ESTUDIANTE
+);
+
+alter table CALIFICACION
+   add constraint FK_CALIFICA_DOCENTE_C_DOCENTE foreign key (ID_DOCENTE)
+      references DOCENTE (ID_DOCENTE)
+      on delete restrict on update restrict;
+
+alter table CALIFICACION
+   add constraint FK_CALIFICA_ESTUDIANT_ESTUDIAN foreign key (ID_ESTUDIANTE)
+      references ESTUDIANTE (ID_ESTUDIANTE)
+      on delete restrict on update restrict;
+
+alter table CALIFICACION
+   add constraint FK_CALIFICA_RELATIONS_MATERIA foreign key (ID_MATERIA)
+      references MATERIA (ID_MATERIA)
+      on delete restrict on update restrict;
+
+alter table CURSO
+   add constraint FK_CURSO_RELATIONS_AULA foreign key (ID_AULA)
+      references AULA (ID_AULA)
+      on delete restrict on update restrict;
+
+alter table ESTUDIANTE
+   add constraint FK_ESTUDIAN_CURSO_EST_CURSO foreign key (ID_CURSO)
+      references CURSO (ID_CURSO)
+      on delete restrict on update restrict;
+
+alter table ESTUDIANTE
+   add constraint FK_ESTUDIAN_RELATIONS_ARMA foreign key (ID_ARMA)
+      references ARMA (ID_ARMA)
+      on delete restrict on update restrict;
+
+alter table ESTUDIANTE
+   add constraint FK_ESTUDIAN_RELATIONS_DOCENTE foreign key (ID_DOCENTE)
+      references DOCENTE (ID_DOCENTE)
+      on delete restrict on update restrict;
+
+alter table MATERIA
+   add constraint FK_MATERIA_DOCENTE_M_DOCENTE foreign key (ID_DOCENTE)
+      references DOCENTE (ID_DOCENTE)
+      on delete restrict on update restrict;
+
+alter table MATERIA
+   add constraint FK_MATERIA_ESTUDIANT_ESTUDIAN foreign key (ID_ESTUDIANTE)
+      references ESTUDIANTE (ID_ESTUDIANTE)
+      on delete restrict on update restrict;
+
+alter table MATERIA
+   add constraint FK_MATERIA_RELATIONS_AULA foreign key (ID_AULA)
+      references AULA (ID_AULA)
+      on delete restrict on update restrict;
+
+alter table SANCION
+   add constraint FK_SANCION_ESTUDIANT_ESTUDIAN foreign key (ID_ESTUDIANTE)
+      references ESTUDIANTE (ID_ESTUDIANTE)
+      on delete restrict on update restrict;
